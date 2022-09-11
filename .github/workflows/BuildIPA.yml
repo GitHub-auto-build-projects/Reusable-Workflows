@@ -16,21 +16,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Resolve XCode Dependencies
-        id: resolution
-        uses: GetSidetrack/action-xcodeproj-spm-update@main
-        with:
-          forceResolution: true
-          failWhenOutdated: false
+   - name: Get directory names
+      id: get-directory-names
+      uses: actions/collect-directory-names-by-file-glob@v1.1
+      with:
+        file-glob: '**/project.pbxproj'
+        unique: "true"
 
-      - name: Create Pull Request
-        if: steps.resolution.outputs.dependenciesChanged == 'true'
-        uses: peter-evans/create-pull-request@v3
-        with:
-          branch: 'main'
-          delete-branch: false
-          commit-message: 'Update Xcode Dependencies'
-          title: 'Updated Xcode Dependencies'
+    - name: Use Directory Names
+      run: echo "Directory Names are ${{ steps.get-directory-names.outputs.directory-names}}
 
       - name: iOS Build Action
         uses: yukiarrr/ios-build-action@v1.5.0
