@@ -29,7 +29,7 @@ jobs:
         if: steps.resolution.outputs.dependenciesChanged == 'true'
         uses: peter-evans/create-pull-request@v3
         with:
-          branch: 'main'
-          delete-branch: false
+          branch: 'dependencies/ios'
+          delete-branch: true
           commit-message: 'Update Xcode Dependencies'
           title: 'Updated Xcode Dependencies'
