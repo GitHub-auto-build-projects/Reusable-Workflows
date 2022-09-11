@@ -2,6 +2,14 @@ name: Build IPA
 
 on:
   workflow_call:
+    inputs:
+      projectName:
+        required: true
+        type: string
+
+jobs:
+  call-workflow-passing-data:
+    
 
 jobs:
   build:
@@ -12,12 +20,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - run: echo ${{ secrets.IOS_CERTS }}
-
       - name: iOS Build Action
         uses: yukiarrr/ios-build-action@v1.5.0
         with:
-          project-path: web-view.xcodeproj
+          project-path: ${{ inputs.projectName }}.xcodeproj
           p12-base64: ${{ secrets.IOS_CERTS }}
           mobileprovision-base64: ${{ secrets.IOS_PROFILE }}
           certificate-password: ${{ secrets.IOS_CERTS_MDP }}
