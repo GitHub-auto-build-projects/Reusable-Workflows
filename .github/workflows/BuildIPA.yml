@@ -17,11 +17,10 @@ jobs:
         uses: actions/checkout@V3
 
       - name: Get directory names
-          id: get-directory-names
-          uses: actions/collect-directory-names-by-file-glob@v1.1
-          with:
-            file-glob: '**/project.pbxproj'
-            unique: "true"
+        uses: actions/collect-directory-names-by-file-glob@v1.1
+        with:
+          file-glob: '**/project.pbxproj'
+          unique: "true"
 
       - name: Use Directory Names
-          run: echo "Directory Names are ${{ steps.get-directory-names.outputs.directory-names}}
+        run: echo "Directory Names are ${{ steps.get-directory-names.outputs.directory-names}}
