@@ -3,7 +3,7 @@ name: Build IPA
 on:
   workflow_call:
     inputs:
-      projectName:
+      projectname:
         required: true
         type: string
 
