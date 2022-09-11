@@ -38,7 +38,7 @@ jobs:
           access_token: ${{ secrets.GITHUB_TOKEN }}
           target_branch: main
 
-  build:
+  install:
     name: Build iOS IPA
     runs-on: macos-latest
 
