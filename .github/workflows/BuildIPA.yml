@@ -14,35 +14,14 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@V3
 
-   - name: Get directory names
-      id: get-directory-names
-      uses: actions/collect-directory-names-by-file-glob@v1.1
-      with:
-        file-glob: '**/project.pbxproj'
-        unique: "true"
+      - name: Get directory names
+          id: get-directory-names
+          uses: actions/collect-directory-names-by-file-glob@v1.1
+          with:
+            file-glob: '**/project.pbxproj'
+            unique: "true"
 
-    - name: Use Directory Names
-      run: echo "Directory Names are ${{ steps.get-directory-names.outputs.directory-names}}
-
-      - name: iOS Build Action
-        uses: yukiarrr/ios-build-action@v1.5.0
-        with:
-          project-path: ${{ inputs.projectname }}.xcodeproj
-          p12-base64: ${{ secrets.IOS_CERTS }}
-          mobileprovision-base64: ${{ secrets.IOS_PROFILE }}
-          certificate-password: ${{ secrets.IOS_CERTS_MDP }}
-          export-method: development
-          code-signing-identity: Apple Development
-          configuration: Debug
-          team-id: ${{ secrets.APPLE_TEAM_ID }}
-
-      - name: rename IPA
-        run: mv output.ipa ${{ github.event.repository.name }}.ipa
-        
-      - uses: GuillaumeFalourd/copy-push-files@v1
-        with:
-          source_files: ${{ github.event.repository.name }}.ipa
-          remote_repository: https://github.com/GitHub-auto-build-projects/${{ github.event.repository.name }}
-          access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Use Directory Names
+          run: echo "Directory Names are ${{ steps.get-directory-names.outputs.directory-names}}
