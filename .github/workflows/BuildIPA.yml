@@ -40,7 +40,7 @@ jobs:
 
   install:
     name: Build iOS IPA
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
