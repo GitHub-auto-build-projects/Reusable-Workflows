@@ -15,6 +15,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Resolve XCode Dependencies
+        id: resolution
+        uses: GetSidetrack/action-xcodeproj-spm-update@main
+        with:
+          forceResolution: true
+          failWhenOutdated: false
+
+      - name: Create Pull Request
+        if: steps.resolution.outputs.dependenciesChanged == 'true'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: 'main'
+          delete-branch: false
+          commit-message: 'Update Xcode Dependencies'
+          title: 'Updated Xcode Dependencies'
+
       - name: iOS Build Action
         uses: yukiarrr/ios-build-action@v1.5.0
         with:
