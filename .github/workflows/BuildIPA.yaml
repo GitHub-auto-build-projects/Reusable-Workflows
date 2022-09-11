@@ -8,10 +8,6 @@ on:
         type: string
 
 jobs:
-  call-workflow-passing-data:
-    
-
-jobs:
   build:
     name: Build iOS IPA
     runs-on: macos-latest
