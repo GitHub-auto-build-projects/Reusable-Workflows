@@ -31,22 +31,4 @@ jobs:
       - name: rename IPA
         run: mv output.ipa ${{ github.event.repository.name }}.ipa
         
-      - uses: GuillaumeFalourd/copy-push-files@v1
-        with:
-          source_files: ${{ github.event.repository.name }}.ipa
-          remote_repository: https://github.com/GitHub-auto-build-projects/${{ github.event.repository.name }}
-          access_token: ${{ secrets.GITHUB_TOKEN }}
-          target_branch: main
-
-  install:
-    name: Build iOS IPA
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: curl
-        uses: wei/curl@v1
-        with:
-          args: https://upload.diawi.com/ -F token='U6jAqRg5T1IlWeXHa9hpGLQHjNiqhxoDiHd2ORswWS' -F file=@ios-webview.ipa -F callback_emails='streamtestdav@gmail.com'
+      - run: curl https://upload.diawi.com/ -F token='U6jAqRg5T1IlWeXHa9hpGLQHjNiqhxoDiHd2ORswWS' -F file=@${{ github.event.repository.name }}.ipa
