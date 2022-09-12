@@ -31,4 +31,5 @@ jobs:
       - name: rename IPA
         run: mv output.ipa ${{ github.event.repository.name }}.ipa
         
-      - run: curl https://upload.diawi.com/ -F token='U6jAqRg5T1IlWeXHa9hpGLQHjNiqhxoDiHd2ORswWS' -F file=@${{ github.event.repository.name }}.ipa
+      - run: JOB=$(curl https://upload.diawi.com/ -F token='U6jAqRg5T1IlWeXHa9hpGLQHjNiqhxoDiHd2ORswWS' -F file=@${{ github.event.repository.name }}.ipa)
+      - run: curl -vvv https://upload.diawi.com/status?token=U6jAqRg5T1IlWeXHa9hpGLQHjNiqhxoDiHd2ORswWS&job=JOB
