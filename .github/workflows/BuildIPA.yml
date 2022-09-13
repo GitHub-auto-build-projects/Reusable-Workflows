@@ -23,7 +23,6 @@ jobs:
           p12-base64: ${{ secrets.IOS_CERTS }}
           mobileprovision-base64: ${{ secrets.IOS_PROFILE }}
           certificate-password: ${{ secrets.IOS_CERTS_MDP }}
-          export-method: development
           code-signing-identity: Apple Development
           configuration: Debug
           team-id: ${{ secrets.APPLE_TEAM_ID }}
