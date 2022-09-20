@@ -20,9 +20,7 @@ jobs:
         uses: yukiarrr/ios-build-action@v1.5.0
         with:
           project-path: ${{ inputs.projectname }}.xcodeproj
-          p12-base64: |
-          ${{ secrets.IOS_DEVELOPMENT_P12 }}
-          ${{ secrets.IOS_DISTRIBUTION_P12 }}
+          p12-base64: ${{ secrets.IOS_DISTRIBUTION_P12 }}
           mobileprovision-base64: ${{ secrets.IOS_PROFILE }}
           certificate-password: ${{ secrets.IOS_CERTS_MDP }}
           code-signing-identity: iOS Distribution
